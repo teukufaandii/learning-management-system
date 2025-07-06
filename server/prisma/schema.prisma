@@ -8,14 +8,18 @@ datasource db {
 }
 
 model User {
-    id           String   @id @default(uuid())
-    name         String
-    email        String   @unique
-    passwordHash String
-    role         Role     @default(user)
-    avatarUrl    String?
-    createdAt    DateTime @default(now())
-    updatedAt    DateTime @updatedAt
+    id              String    @id @default(uuid())
+    name            String
+    email           String    @unique
+    passwordHash    String
+    role            Role      @default(user)
+    avatarUrl       String?
+    token           String?   @unique
+    tokenExpiresAt  DateTime?
+    isActive        Boolean   @default(true)
+    isEmailVerified Boolean   @default(false)
+    createdAt       DateTime  @default(now())
+    updatedAt       DateTime  @updatedAt
 
     courses      Course[]      @relation("CreatedCourses")
     purchases    Purchase[]
